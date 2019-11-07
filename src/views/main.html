@@ -1,0 +1,139 @@
+<div class="animated fadeIn">
+    <div class="row">
+        <div class="col-lg-9">
+            <div class="row" ng-controller="metricCtrl">
+                <div class="col-lg-3 col-md-3 col-6" ng-repeat="metric in metrics" ng-click="select($index)" ng-class="{active: $index == selected}">
+                    <div class="metric_card card">
+                        <div class="card-header">
+                            <h3 class="mb-0">{{metric.count}}</h3><small><b class="text-uppercase" style="opacity: 0.5;">{{metric.title}}</b></small></div>
+                        <div class="card-body p-0" ng-controller="cardChartCtrl3"><canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-options="options" chart-colors="colors" height="70"></canvas>
+                        </div>
+
+                        <div class="card-footer pt-2">
+                            <b class="text-success" ng-if="metric.status > 0 || metric.status == 0">
+                            <i class="fa fa-long-arrow-up"></i> +{{metric.status}} %</b>
+                            <b class="text-danger" ng-if="metric.status < 0">
+                                    <i class="fa fa-long-arrow-down"></i> {{metric.status}} %</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card sessionOverview bg-none" ng-controller="sessionOverviewCtrl">
+                        <div class="card-header bg-none">
+                            <div class="float-left">
+                                <h4 class="card_title mb-0">Sessions Overview</h4>
+                                <small class="cust_color"><i class="icon-calendar"></i>11/04/2019 - 12/04/2019</small>
+                            </div>
+                            <div class="float-right _tools" style="display: flex;">
+                                <ul class="_filters">
+                                    <li>Today</li>
+                                    <li>7d</li>
+                                    <li class="active">2w</li>
+                                    <li>1m</li>
+                                    <li>3m</li>
+                                    <li>2019</li>
+                                </ul>
+                                <button class="btn btn-dark p-2" style="display: flex;"><i class="icon-download"></i> <span class="pl-4" style="font-size: 12px;font-weight: 600;">Download CSV</span></button>
+                            </div>
+                        </div>
+                        <div class="card-body pt-0 pb-0" style="height: 200px;">
+                            <div class="chart-wrapper">
+                                <canvas class="chart chart-line" chart-data="data" chart-labels="labels" chart-legend="false" chart-series="series" chart-click="onClick" chart-options="options" chart-colors="colors" height="200"></canvas>
+                            </div>
+                            </canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row session_list" ng-controller="sessionCtrl">
+                <div class="col-lg-3" ng-repeat="session in sessions">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="float-left mt-1"><img ng-src="{{session.logo}}" width="32" height="32" /></div>
+                            <div class="_titleinfo"><small class="_sessiontitle">{{session.title}}</small>
+                                <h5 class="sessionCompany">{{session.company}}</h4>
+                            </div>
+                            <div class="pull-right"><button class="btn btn-sm" style="background: transparent;"><i class="fa fa-ellipsis-v"></i></button></div>
+                        </div>
+                        <div class="card-body pt-1 pb-3"><b class="session_count">{{session.count}}</b> / sessions</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 p-0">
+            <div class="_asidepane">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="float-left card_title">Views by browser</h4>
+                        <div class="tool_box float-right">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm tools_drop dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-refresh"></i> Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-0" ng-controller="BroswesrViewsCtrl">
+                        <canvas id="radar" class="chart chart-radar" chart-data="data" chart-options="options" chart-labels="labels" chart-colours="colors" height="260px"></canvas>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="float-left card_title">Statistics</h4>
+                        <div class="tool_box float-right">
+                            <div class="dropdown">
+                                <button class="btn btn-secondary btn-sm tools_drop dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                            <i class="fa fa-ellipsis-v" aria-hidden="true"></i>
+                                    </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><i class="fa fa-refresh"></i> Refresh</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body pt-0 pb-0">
+                        <div class="_statistics">
+                            <div class="_stat-title">
+                                Online Visitors
+                            </div>
+                            <div class="_stat-pro">
+                                <round-progress max="100" current="20" color="#6b75ca" bgcolor="#dfe0e9" radius="100" stroke="20" semi="false" rounded="true" clockwise="true" responsive="false" duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+                                <i class="icon-users"></i>
+                            </div>
+                            <div class="_stat-data">
+                                <p class="mb-0 max_val"><small><b>MAX 512</b></small></p>
+                                <p class="mb-0 stat_count">312</p>
+                            </div>
+                        </div>
+                        <div class="_statistics">
+                            <div class="_stat-title">
+                                New Visitors
+                            </div>
+                            <div class="_stat-pro">
+                                <round-progress max="100" current="70" color="#6b75ca" bgcolor="#dfe0e9" radius="100" stroke="20" semi="false" rounded="true" clockwise="true" responsive="false" duration="800" animation="easeInOutQuart" animation-delay="0"></round-progress>
+                                <i class="icon-users"></i>
+                            </div>
+                            <div class="_stat-data">
+                                <p class="mb-0 max_val"><small><b>MAX 381</b></small></p>
+                                <p class="mb-0 stat_count">136</p>
+                            </div>
+                        </div>
+                        <div class="_statistics">
+                            <div class="_stat-title">
+                                Average Revenue
+                            </div>
+                            <div class="_stat-data float-right text-right" style="width:100%;">
+                                <p class="mb-0 d-inline-block font-lg">3076.25 <span class="badge badge-blue">+21%</span></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
