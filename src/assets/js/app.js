@@ -17,7 +17,8 @@ angular
         'angular-loading-bar',
         'ngAnimate',
         'chart.js',
-        'angular-svg-round-progressbar'
+        'angular-svg-round-progressbar',
+        'ngMaterial',
     ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;
