@@ -11,11 +11,17 @@ var grayLight = '#818a91';
 var grayLighter = '#d1d4d7';
 var grayLightest = '#f8f9fa';
 
+mobiscroll.settings = {
+    theme: 'ios',
+    lang: 'en'
+};
+
 angular
     .module('app', [
         'ui.router',
         'angular-loading-bar',
-        'ngMaterial', 'ngMessages'
+        'ngMaterial', 'ngMessages',
+        'mobiscroll-form', 'mobiscroll-listview'
     ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

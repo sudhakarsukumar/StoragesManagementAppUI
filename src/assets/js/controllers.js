@@ -1,40 +1,24 @@
 // controller.js
 angular
     .module('app')
-    .config(function($mdIconProvider) {
-        $mdIconProvider
-            .icon('hangout', 'assets/img/hangout.svg', 24)
-            .icon('mail', 'assets/img/mail.svg', 24)
-            .icon('message', 'assets/img/message.svg', 24)
-            .icon('copy2', 'assets/img/copy2.svg', 24)
-            .icon('facebook', 'assets/img/facebook.svg', 24)
-            .icon('twitter', 'assets/img/twitter.svg', 24);
-    })
     .controller('driveCtrl', driveCtrl)
     .controller('folderCtrl', folderCtrl)
-    .controller('BottomSheetExample', function($scope, $timeout, $mdBottomSheet, $mdToast) {
+    .controller('clouddrive', function($scope, $timeout, $mdBottomSheet, $mdToast) {
         $scope.alert = '';
 
         $scope.showGridBottomSheet = function() {
             $scope.alert = '';
             $mdBottomSheet.show({
-                templateUrl: 'views/bottom-sheet-grid-template.html',
-                controller: 'GridBottomSheetCtrl',
+                templateUrl: 'views/drive.html',
+                controller: 'clouddriveCtrl',
                 clickOutsideToClose: false
-            }).then(function(clickedItem) {
-                $mdToast.show(
-                    $mdToast.simple()
-                    .textContent(clickedItem['name'] + ' clicked!')
-                    .position('top right')
-                    .hideDelay(1500)
-                );
-            }).catch(function(error) {
+            }).then(function(clickedItem) {}).catch(function(error) {
                 // User clicked outside or hit escape
             });
         };
 
     })
-    .controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
+    .controller('clouddriveCtrl', function($scope, $mdBottomSheet) {
         $scope.items = [
             { name: 'Hangout', icon: 'hangout' },
             { name: 'Mail', icon: 'mail' },
@@ -64,7 +48,117 @@ angular
             $templateRequest(url);
         });
 
-    })
+    }).controller('demoController', ['$scope', function($scope) {
+
+        $scope.listImages = [
+            { name: 'Image 1' },
+            { name: 'Image 2' },
+            { name: 'Image 3' },
+            { name: 'Image 4' },
+            { name: 'Image 5' }
+        ];
+
+        $scope.menuImages = [
+            { name: 'My Image 1' },
+            { name: 'My Image 2' },
+            { name: 'My Image 3' },
+            { name: 'My Image 4' },
+            { name: 'My Image 5' }
+        ];
+
+        $scope.listSettings = {
+            //settings,
+            enhance: true, // More info about enhance: https://docs.mobiscroll.com/4-8-4/angularjs/listview#opt-enhance
+            stages: [{ // More info about stages: https://docs.mobiscroll.com/4-8-4/angularjs/listview#opt-stages
+                    percent: 25,
+                    icon: 'link',
+                    text: 'Get link',
+                    action: function(event, inst) {
+                        mobiscroll.toast({
+                            message: 'Link copied'
+                        });
+                    }
+                }, {
+                    percent: 50,
+                    icon: 'download',
+                    text: 'Download',
+                    action: function(event, inst) {
+                        mobiscroll.toast({
+                            message: 'Downloaded'
+                        });
+                    }
+                }, {
+                    percent: -25,
+                    icon: 'print',
+                    text: 'Print',
+                    action: function(event, inst) {
+                        mobiscroll.toast({
+                            message: 'Printing...'
+                        });
+                    }
+                },
+                {
+                    percent: -50,
+                    icon: 'remove',
+                    text: 'Delete',
+                    confirm: true,
+                    action: function(event, inst) {
+                        $scope.$apply(function() {
+                            $scope.listImages.splice(event.index, 1);
+                        });
+                    }
+                }
+            ]
+        }
+
+        $scope.menuSettings = {
+            //settings,
+            enhance: true, // More info about enhance: https://docs.mobiscroll.com/4-8-4/angularjs/listview#opt-enhance
+            actions: [{ // More info about actions: https://docs.mobiscroll.com/4-8-4/angularjs/listview#opt-actions
+                icon: 'link',
+                action: function(event, inst) {
+                    mobiscroll.toast({
+                        message: 'Linked'
+                    });
+                }
+            }, {
+                icon: 'star3',
+                action: function(event, inst) {
+                    mobiscroll.toast({
+                        message: 'Starred'
+                    });
+                }
+            }, {
+                icon: 'download',
+                action: function(event, inst) {
+                    mobiscroll.toast({
+                        message: 'Downloaded'
+                    });
+                }
+            }, {
+                icon: 'print',
+                action: function(event, inst) {
+                    mobiscroll.toast({
+                        message: 'Printing...'
+                    });
+                }
+            }, {
+                icon: 'remove',
+                undo: true, // More info about undo: https://docs.mobiscroll.com/4-8-4/angularjs/listview#methods-undo
+                action: function(event, inst) {
+                    $scope.$apply(function() {
+                        $scope.menuImages.splice(event.index, 1);
+                    });
+                }
+            }]
+        }
+
+        $scope.formSettings = {
+            lang: 'en', // Specify language like: lang: 'pl' or omit setting to use default
+            theme: 'ios' // Specify theme like: theme: 'ios' or omit setting to use default
+        };
+
+    }])
 
 driveCtrl.$inject = ['$scope'];
 

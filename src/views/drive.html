@@ -87,6 +87,16 @@
             </div>
         </div>
         <div ng-cloak>
+            <div ng-controller="demoController">
+                <div mobiscroll-form="formSettings">
+                    <div class="mbsc-form-group">
+                        <div class="mbsc-form-group-title">Action menu</div>
+                        <ul mobiscroll-listview="menuSettings" mobiscroll-data="menuImages" class="mbsc-cloak">
+                            <li data-icon="image2">{{item.name}}</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
             <h4 class="md-subtitle mt-3 mb-3">Last Files: <span style="color:#c6ccd5;">Google Disk </span></h4>
             <div class="row">
                 <div class="col-12">
