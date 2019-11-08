@@ -15,7 +15,7 @@ angular
     .module('app', [
         'ui.router',
         'angular-loading-bar',
-        'ngMaterial',
+        'ngMaterial', 'ngMessages'
     ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
         cfpLoadingBarProvider.includeSpinner = false;

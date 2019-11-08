@@ -1,274 +1,98 @@
 // controller.js
 angular
-    .module('app')
-    .controller('metricCtrl', metricCtrl)
-    .controller('sessionCtrl', sessionCtrl)
-    .controller('sessionOverviewCtrl', sessionOverviewCtrl)
-    .controller('BroswesrViewsCtrl', BroswesrViewsCtrl)
-    .controller('cardChartCtrl3', cardChartCtrl3)
+    .module('app').config(function($mdIconProvider) {
+        $mdIconProvider
+            .icon('share', 'img/icons/baseline-share-24px.svg', 24)
+            .icon('upload', 'img/icons/upload.svg', 24)
+            .icon('copy', 'img/icons/copy.svg', 24)
+            .icon('print', 'img/icons/print.svg', 24)
+            .icon('hangout', 'img/icons/hangout.svg', 24)
+            .icon('mail', 'img/icons/mail.svg', 24)
+            .icon('message', 'img/icons/message.svg', 24)
+            .icon('copy2', 'img/icons/copy2.svg', 24)
+            .icon('facebook', 'img/icons/facebook.svg', 24)
+            .icon('twitter', 'img/icons/twitter.svg', 24);
+    })
+    .controller('BottomSheetExample', function($scope, $timeout, $mdBottomSheet, $mdToast) {
+        $scope.alert = '';
 
+        $scope.showListBottomSheet = function() {
+            $scope.alert = '';
+            $mdBottomSheet.show({
+                templateUrl: 'bottom-sheet-list-template.html',
+                controller: 'ListBottomSheetCtrl'
+            }).then(function(clickedItem) {
+                $scope.alert = clickedItem['name'] + ' clicked!';
+            }).catch(function(error) {
+                // User clicked outside or hit escape
+            });
+        };
 
-//convert Hex to RGBA
-function convertHex(hex, opacity) {
-    hex = hex.replace('#', '');
-    r = parseInt(hex.substring(0, 2), 16);
-    g = parseInt(hex.substring(2, 4), 16);
-    b = parseInt(hex.substring(4, 6), 16);
+        $scope.showGridBottomSheet = function() {
+            $scope.alert = '';
+            $mdBottomSheet.show({
+                templateUrl: 'bottom-sheet-grid-template.html',
+                controller: 'GridBottomSheetCtrl',
+                clickOutsideToClose: false
+            }).then(function(clickedItem) {
+                $mdToast.show(
+                    $mdToast.simple()
+                    .textContent(clickedItem['name'] + ' clicked!')
+                    .position('top right')
+                    .hideDelay(1500)
+                );
+            }).catch(function(error) {
+                // User clicked outside or hit escape
+            });
+        };
+    })
 
-    result = 'rgba(' + r + ',' + g + ',' + b + ',' + opacity / 100 + ')';
-    return result;
-}
+.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
 
-metricCtrl.$inject = ['$scope'];
+        $scope.items = [
+            { name: 'Share', icon: 'share' },
+            { name: 'Upload', icon: 'upload' },
+            { name: 'Copy', icon: 'copy' },
+            { name: 'Print this page', icon: 'print' },
+        ];
 
-function metricCtrl($scope) {
-    $scope.metrics = [{
-            'id': 1,
-            'title': 'Total Sessions',
-            'count': '2100',
-            'status': 14,
-        },
-        {
-            'id': 2,
-            'title': 'Total Visitors',
-            'count': '1228',
-            'status': -3,
-        },
-        {
-            'id': 3,
-            'title': 'Time Spent / HR',
-            'count': '6.92',
-            'status': 1,
-        },
-        {
-            'id': 4,
-            'title': 'Avg. Requests Received',
-            'count': '2.3',
-            'status': 21,
-        }
-    ];
-    $scope.selected = 0;
+        $scope.listItemClick = function($index) {
+            var clickedItem = $scope.items[$index];
+            $mdBottomSheet.hide(clickedItem);
+        };
+    })
+    .controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
+        $scope.items = [
+            { name: 'Hangout', icon: 'hangout' },
+            { name: 'Mail', icon: 'mail' },
+            { name: 'Message', icon: 'message' },
+            { name: 'Copy', icon: 'copy2' },
+            { name: 'Facebook', icon: 'facebook' },
+            { name: 'Twitter', icon: 'twitter' },
+        ];
 
-    $scope.select = function(index) {
-        $scope.selected = index;
-    };
-}
+        $scope.listItemClick = function($index) {
+            var clickedItem = $scope.items[$index];
+            $mdBottomSheet.hide(clickedItem);
+        };
+    })
+    .run(function($templateRequest) {
 
-sessionCtrl.$inject = ['$scope'];
+        var urls = [
+            'img/icons/baseline-share-24px.svg',
+            'img/icons/upload.svg',
+            'img/icons/copy.svg',
+            'img/icons/print.svg',
+            'img/icons/hangout.svg',
+            'img/icons/mail.svg',
+            'img/icons/message.svg',
+            'img/icons/copy2.svg',
+            'img/icons/facebook.svg',
+            'img/icons/twitter.svg'
+        ];
 
-function sessionCtrl($scope) {
-    $scope.sessions = [{
-            'id': 1,
-            'title': 'TOP PLATFORM',
-            'company': 'WINDOWS',
-            'count': '1833',
-            'logo': 'assets/img/windows.svg',
-        },
-        {
-            'id': 2,
-            'title': 'TOP SOURCES',
-            'company': 'STACK OVERFLOW',
-            'count': '420',
-            'logo': 'assets/img/stack.png',
-        },
-        {
-            'id': 3,
-            'title': 'TOP BROWSER',
-            'company': 'CHROME',
-            'count': '2010',
-            'logo': 'assets/img/chrome.svg',
-        },
-        {
-            'id': 4,
-            'title': 'TOP MAILBOX',
-            'company': 'OUTLOOK',
-            'count': '326',
-            'logo': 'assets/img/outlook.svg',
-        }
-    ];
-    $scope.selected = 0;
-
-    $scope.select = function(index) {
-        $scope.selected = index;
-    };
-    $(document).ready(function() {
-        $('.session_list').slick({
-            infinite: false,
-            slidesToShow: 3,
-            dots: false,
-            arrows: false,
-            responsive: [{
-                    breakpoint: 1024,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2,
-                    }
-                },
-                {
-                    breakpoint: 600,
-                    settings: {
-                        slidesToShow: 2,
-                        slidesToScroll: 2
-                    }
-                },
-                {
-                    breakpoint: 480,
-                    settings: {
-                        slidesToShow: 1,
-                        slidesToScroll: 1
-                    }
-                }
-            ]
+        angular.forEach(urls, function(url) {
+            $templateRequest(url);
         });
-        $(window).scroll(function() {
-            var sticky = $('.app-header'),
-                scroll = $(window).scrollTop();
 
-            if (scroll >= 5) sticky.addClass('fixed');
-            else sticky.removeClass('fixed');
-        });
     });
-}
-sessionOverviewCtrl.$inject = ['$scope'];
-
-function sessionOverviewCtrl($scope) {
-
-    var data1 = [300, 350, 0, 0, 120, 118, 130, 190, 140, 230, 218, 288, 320, 280];
-
-    $scope.labels = ['15\nSun', '16\nMon', '17\nTue', '18\nWed', '19\nThu', '20\nFri', '21\nSat', '22\nSun', '23\nMon', '24\nTue', '25\nWed', '26\nhu', '27\nFri', '28\nSat'];
-    $scope.series = ['Current'];
-    $scope.data = [data1];
-    $scope.colors = [{
-        backgroundColor: 'transparent',
-        borderColor: '#6b75ca',
-        pointHoverBackgroundColor: '#fff',
-    }, ];
-    $scope.options = {
-        tooltips: {
-            backgroundColor: '#fff',
-            titleFontColor: '#393c51',
-            callbacks: {
-                label: function(tooltipItem, data) {
-                    //return text to render for an individual item in the tooltip
-                    return 'Sessions Overview';
-                },
-                labelColor: function(tooltipItem, chart) {
-                    return {
-                        backgroundColor: '#6b75ca'
-                    }
-                },
-                labelTextColor: function(tooltipItem, chart) {
-                    return {
-                        backgroundColor: '#9297b6'
-                    }
-                }
-            }
-        },
-        responsive: true,
-        maintainAspectRatio: true,
-        scales: {
-            xAxes: [{
-                gridLines: {
-                    drawOnChartArea: false,
-                    color: '#9297b6'
-                },
-
-                ticks: {
-                    // callback: function(value) {
-                    //     return value.charAt(0);
-                    // }
-                    fontColor: '#9297b6'
-                }
-            }],
-            yAxes: [{
-
-                ticks: {
-                    beginAtZero: true,
-                    maxTicksLimit: 5,
-                    stepSize: 100,
-                    max: 400,
-                    fontColor: '#9297b6'
-                },
-
-            }]
-        },
-        elements: {
-            point: {
-                radius: 0,
-                hitRadius: 10,
-                hoverRadius: 4,
-                hoverBorderWidth: 3,
-            }
-        },
-    }
-}
-
-BroswesrViewsCtrl.$inject = ['$scope'];
-
-function BroswesrViewsCtrl($scope) {
-    $scope.labels = ["Firefox", "Explorer", "Chrome", "Safari"];
-
-    $scope.data = [
-        [33, 30, 38, 23]
-    ];
-    $scope.options = {
-
-        legengs: false,
-        scale: {
-            gridLines: {
-                circular: true,
-            },
-            ticks: {
-                beginAtZero: true,
-                max: 40,
-                min: 0,
-                stepSize: 10,
-            }
-        }
-    }
-}
-
-cardChartCtrl3.$inject = ['$scope'];
-
-function cardChartCtrl3($scope) {
-
-    $scope.labels = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
-    $scope.data = [
-        [78, 81, 80, 45, 34, 12, 40]
-    ];
-    $scope.data4 = [
-        [35, 23, 56, 22, 97, 23, 64]
-    ];
-    $scope.colors = [{
-        backgroundColor: 'transparent',
-        borderColor: 'rgba(255,255,255)',
-    }];
-    $scope.options = {
-        maintainAspectRatio: false,
-        scales: {
-            xAxes: [{
-                display: true,
-                gridLines: {
-                    drawOnChartArea: false,
-                },
-                ticks: {
-                    fontSize: '8',
-                    fontColor: '#858ed6'
-                }
-            }],
-            yAxes: [{
-                display: false
-            }]
-        },
-        elements: {
-            line: {
-                borderWidth: 2
-            },
-            point: {
-                radius: 0,
-                hitRadius: 10,
-                hoverRadius: 4,
-            },
-        },
-    }
-}
