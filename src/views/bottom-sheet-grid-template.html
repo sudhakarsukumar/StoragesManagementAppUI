@@ -1,0 +1,138 @@
+<md-bottom-sheet class="md-grid" layout="column">
+    <div class="drive_info">
+        <div class="drive_ico"><img src="../assets/img/dropbox.svg" width="52" height="52" /></div>
+        <div class="drive_details">
+            <h4 class="drive_name">Dropbox <span class="drive_subname">Cloud</span></h4>
+            <div class="">
+                <div class="pt-2 pb-2" style="display: flex;">
+                    <div class="text-left float-left" style="width:60%;">60 GB</div>
+                    <div class="text-right float-right" style="width:40%;">100 GB</div>
+                </div>
+                <div layout="column" ng-cloak class="yellow">
+                    <md-progress-linear md-mode="determinate" value="60"></md-progress-linear>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="folder_details">
+        <div ng-cloak>
+            <h4 class="md-subtitle mt-3">Folders</h4>
+            <div class="row folders" ng-controller="folderCtrl">
+                <div class="col-lg-3">
+                    <div class="folders_list">
+                        <div class="folders_info_head">
+                            <img alt="svgImg" style="width: 48px;height: 48px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzNkNzNkZCI+PHBhdGggZD0iTTE0My4zMzMzMyw0M2gtNTcuMzMzMzNsLTE0LjMzMzMzLC0xNC4zMzMzM2gtNDNjLTcuODgzMzMsMCAtMTQuMzMzMzMsNi40NSAtMTQuMzMzMzMsMTQuMzMzMzN2ODZjMCw3Ljg4MzMzIDYuNDUsMTQuMzMzMzMgMTQuMzMzMzMsMTQuMzMzMzNoMTE0LjY2NjY3YzcuODgzMzMsMCAxNC4zMzMzMywtNi40NSAxNC4zMzMzMywtMTQuMzMzMzN2LTcxLjY2NjY3YzAsLTcuODgzMzMgLTYuNDUsLTE0LjMzMzMzIC0xNC4zMzMzMywtMTQuMzMzMzN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=">
+                            <div class="folder_coowners">
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/1.jpg" /></div>
+                                </div>
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/2.jpg" /></div>
+                                </div>
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/3.jpg" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="folder_title">My Developments</div>
+                            <div class="folder_date">Created: 08.11.2019</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="folders_list">
+                        <div class="folders_info_head">
+                            <img alt="svgImg" style="width: 48px;height: 48px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzNkNzNkZCI+PHBhdGggZD0iTTE0My4zMzMzMyw0M2gtNTcuMzMzMzNsLTE0LjMzMzMzLC0xNC4zMzMzM2gtNDNjLTcuODgzMzMsMCAtMTQuMzMzMzMsNi40NSAtMTQuMzMzMzMsMTQuMzMzMzN2ODZjMCw3Ljg4MzMzIDYuNDUsMTQuMzMzMzMgMTQuMzMzMzMsMTQuMzMzMzNoMTE0LjY2NjY3YzcuODgzMzMsMCAxNC4zMzMzMywtNi40NSAxNC4zMzMzMywtMTQuMzMzMzN2LTcxLjY2NjY3YzAsLTcuODgzMzMgLTYuNDUsLTE0LjMzMzMzIC0xNC4zMzMzMywtMTQuMzMzMzN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=">
+                            <div class="folder_coowners">
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/1.jpg" /></div>
+                                </div>
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/2.jpg" /></div>
+                                </div>
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/3.jpg" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="folder_title">Dribbles</div>
+                            <div class="folder_date">Created: 06.11.2019</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="folders_list">
+                        <div class="folders_info_head">
+                            <img alt="svgImg" style="width: 48px;height: 48px;" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHg9IjBweCIgeT0iMHB4Igp3aWR0aD0iMjQiIGhlaWdodD0iMjQiCnZpZXdCb3g9IjAgMCAxNzIgMTcyIgpzdHlsZT0iIGZpbGw6IzAwMDAwMDsiPjxnIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0ibm9uemVybyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIHN0cm9rZS1saW5lY2FwPSJidXR0IiBzdHJva2UtbGluZWpvaW49Im1pdGVyIiBzdHJva2UtbWl0ZXJsaW1pdD0iMTAiIHN0cm9rZS1kYXNoYXJyYXk9IiIgc3Ryb2tlLWRhc2hvZmZzZXQ9IjAiIGZvbnQtZmFtaWx5PSJub25lIiBmb250LXdlaWdodD0ibm9uZSIgZm9udC1zaXplPSJub25lIiB0ZXh0LWFuY2hvcj0ibm9uZSIgc3R5bGU9Im1peC1ibGVuZC1tb2RlOiBub3JtYWwiPjxwYXRoIGQ9Ik0wLDE3MnYtMTcyaDE3MnYxNzJ6IiBmaWxsPSJub25lIj48L3BhdGg+PGcgZmlsbD0iIzNkNzNkZCI+PHBhdGggZD0iTTE0My4zMzMzMyw0M2gtNTcuMzMzMzNsLTE0LjMzMzMzLC0xNC4zMzMzM2gtNDNjLTcuODgzMzMsMCAtMTQuMzMzMzMsNi40NSAtMTQuMzMzMzMsMTQuMzMzMzN2ODZjMCw3Ljg4MzMzIDYuNDUsMTQuMzMzMzMgMTQuMzMzMzMsMTQuMzMzMzNoMTE0LjY2NjY3YzcuODgzMzMsMCAxNC4zMzMzMywtNi40NSAxNC4zMzMzMywtMTQuMzMzMzN2LTcxLjY2NjY3YzAsLTcuODgzMzMgLTYuNDUsLTE0LjMzMzMzIC0xNC4zMzMzMywtMTQuMzMzMzN6Ij48L3BhdGg+PC9nPjwvZz48L3N2Zz4=">
+                            <div class="folder_coowners">
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/1.jpg" /></div>
+                                </div>
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/2.jpg" /></div>
+                                </div>
+                                <div class="col-2 p-1">
+                                    <div class="coowners"><img src="../assets/img/3.jpg" /></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="">
+                            <div class="folder_title">PSD</div>
+                            <div class="folder_date">Created: 08.11.2019</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div ng-cloak>
+            <h4 class="md-subtitle mt-3 mb-3">Last Files: <span style="color:#c6ccd5;">Google Disk </span></h4>
+            <div class="row">
+                <div class="col-12">
+                    <div class="last_files">
+                        <div class="file_ico">
+                            <img src="../assets/img/doc.svg" width="42px" />
+                        </div>
+                        <div class="file_detail">
+                            <h4 class="file_info mb-0 mt-1"><span class="file_name">Brandbook.</span><span class="file_ext">PDF</span></h4>
+                            <p class="file_path mb-0">Dropbox/Projects/Ei/Brandbook.pdf</p>
+                        </div>
+                        <div class="download">
+                            <div class="inner_down">
+                                <md-progress-circular style="z-index: 999;" md-mode="determinate" value="55"></md-progress-circular>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="last_files">
+                        <div class="file_ico">
+                            <img src="../assets/img/doc.svg" width="42px" />
+                        </div>
+                        <div class="file_detail">
+                            <h4 class="file_info mb-0 mt-1"><span class="file_name">Logo.</span><span class="file_ext">ai</span></h4>
+                            <p class="file_path mb-0">Dropbox/Fitness-Tech/Logo.ai</p>
+                        </div>
+                    </div>
+                    <div class="last_files">
+                        <div class="file_ico">
+                            <img src="../assets/img/doc.svg" width="42px" />
+                        </div>
+                        <div class="file_detail">
+                            <h4 class="file_info mb-0 mt-1"><span class="file_name">Landing Page.</span><span class="file_ext">sketch</span></h4>
+                            <p class="file_path mb-0">Dropbox/Development/New/Landing Page.sketch</p>
+                        </div>
+                    </div>
+                    <div class="last_files">
+                        <div class="file_ico">
+                            <img src="../assets/img/doc.svg" width="42px" />
+                        </div>
+                        <div class="file_detail">
+                            <h4 class="file_info mb-0 mt-1"><span class="file_name">Dashboard.</span><span class="file_ext">sketch</span></h4>
+                            <p class="file_path mb-0">Dropbox/Development/New/Dashboard.sketch</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</md-bottom-sheet>

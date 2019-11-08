@@ -1,37 +1,24 @@
 // controller.js
 angular
-    .module('app').config(function($mdIconProvider) {
+    .module('app')
+    .config(function($mdIconProvider) {
         $mdIconProvider
-            .icon('share', 'img/icons/baseline-share-24px.svg', 24)
-            .icon('upload', 'img/icons/upload.svg', 24)
-            .icon('copy', 'img/icons/copy.svg', 24)
-            .icon('print', 'img/icons/print.svg', 24)
-            .icon('hangout', 'img/icons/hangout.svg', 24)
-            .icon('mail', 'img/icons/mail.svg', 24)
-            .icon('message', 'img/icons/message.svg', 24)
-            .icon('copy2', 'img/icons/copy2.svg', 24)
-            .icon('facebook', 'img/icons/facebook.svg', 24)
-            .icon('twitter', 'img/icons/twitter.svg', 24);
+            .icon('hangout', 'assets/img/hangout.svg', 24)
+            .icon('mail', 'assets/img/mail.svg', 24)
+            .icon('message', 'assets/img/message.svg', 24)
+            .icon('copy2', 'assets/img/copy2.svg', 24)
+            .icon('facebook', 'assets/img/facebook.svg', 24)
+            .icon('twitter', 'assets/img/twitter.svg', 24);
     })
+    .controller('driveCtrl', driveCtrl)
+    .controller('folderCtrl', folderCtrl)
     .controller('BottomSheetExample', function($scope, $timeout, $mdBottomSheet, $mdToast) {
         $scope.alert = '';
-
-        $scope.showListBottomSheet = function() {
-            $scope.alert = '';
-            $mdBottomSheet.show({
-                templateUrl: 'bottom-sheet-list-template.html',
-                controller: 'ListBottomSheetCtrl'
-            }).then(function(clickedItem) {
-                $scope.alert = clickedItem['name'] + ' clicked!';
-            }).catch(function(error) {
-                // User clicked outside or hit escape
-            });
-        };
 
         $scope.showGridBottomSheet = function() {
             $scope.alert = '';
             $mdBottomSheet.show({
-                templateUrl: 'bottom-sheet-grid-template.html',
+                templateUrl: 'views/bottom-sheet-grid-template.html',
                 controller: 'GridBottomSheetCtrl',
                 clickOutsideToClose: false
             }).then(function(clickedItem) {
@@ -45,21 +32,7 @@ angular
                 // User clicked outside or hit escape
             });
         };
-    })
 
-.controller('ListBottomSheetCtrl', function($scope, $mdBottomSheet) {
-
-        $scope.items = [
-            { name: 'Share', icon: 'share' },
-            { name: 'Upload', icon: 'upload' },
-            { name: 'Copy', icon: 'copy' },
-            { name: 'Print this page', icon: 'print' },
-        ];
-
-        $scope.listItemClick = function($index) {
-            var clickedItem = $scope.items[$index];
-            $mdBottomSheet.hide(clickedItem);
-        };
     })
     .controller('GridBottomSheetCtrl', function($scope, $mdBottomSheet) {
         $scope.items = [
@@ -79,20 +52,146 @@ angular
     .run(function($templateRequest) {
 
         var urls = [
-            'img/icons/baseline-share-24px.svg',
-            'img/icons/upload.svg',
-            'img/icons/copy.svg',
-            'img/icons/print.svg',
-            'img/icons/hangout.svg',
-            'img/icons/mail.svg',
-            'img/icons/message.svg',
-            'img/icons/copy2.svg',
-            'img/icons/facebook.svg',
-            'img/icons/twitter.svg'
+            'assets/img/hangout.svg',
+            'assets/img/mail.svg',
+            'assets/img/message.svg',
+            'assets/img/copy2.svg',
+            'assets/img/facebook.svg',
+            'assets/img/twitter.svg'
         ];
 
         angular.forEach(urls, function(url) {
             $templateRequest(url);
         });
 
+    })
+
+driveCtrl.$inject = ['$scope'];
+
+function driveCtrl($scope) {
+    $scope.drives = [{
+            'id': 1,
+            'title': 'Dropbox',
+            'used': '65',
+            'max': '100',
+            'logo': 'assets/img/dropbox.svg',
+        },
+        {
+            'id': 2,
+            'title': 'Google Drive',
+            'used': '5',
+            'max': '15',
+            'logo': 'assets/img/google.svg',
+        },
+        {
+            'id': 3,
+            'title': 'Onedrive',
+            'used': '2',
+            'max': '10',
+            'logo': 'assets/img/onedrive.svg',
+        }
+    ];
+    $scope.selected = 0;
+
+    $scope.select = function(index) {
+        $scope.selected = index;
+    };
+    $(document).ready(function() {
+        $('.drive_list').slick({
+            infinite: false,
+            slidesToShow: 3,
+            dots: false,
+            arrows: false,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
     });
+}
+folderCtrl.$inject = ['$scope'];
+
+function folderCtrl($scope) {
+    $scope.drives = [{
+            'id': 1,
+            'title': 'Dropbox',
+            'used': '65',
+            'max': '100',
+            'logo': 'assets/img/dropbox.svg',
+        },
+        {
+            'id': 2,
+            'title': 'Google Drive',
+            'used': '5',
+            'max': '15',
+            'logo': 'assets/img/google.svg',
+        },
+        {
+            'id': 3,
+            'title': 'Onedrive',
+            'used': '2',
+            'max': '10',
+            'logo': 'assets/img/onedrive.svg',
+        }
+    ];
+    $scope.selected = 0;
+
+    $scope.select = function(index) {
+        $scope.selected = index;
+    };
+    $(document).ready(function() {
+        $('.folders').slick({
+            infinite: false,
+            slidesToShow: 3,
+            dots: false,
+            arrows: false,
+            responsive: [{
+                    breakpoint: 1024,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+                    }
+                },
+                {
+                    breakpoint: 600,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2
+                    }
+                },
+                {
+                    breakpoint: 480,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                },
+                {
+                    breakpoint: 320,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1
+                    }
+                }
+            ]
+        });
+    });
+}
