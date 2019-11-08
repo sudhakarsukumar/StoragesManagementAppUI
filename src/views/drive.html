@@ -87,18 +87,30 @@
             </div>
         </div>
         <div ng-cloak>
-            <div ng-controller="demoController">
+            <h4 class="md-subtitle mt-3 mb-3">Last Files: <span style="color:#c6ccd5;">Google Disk </span></h4>
+            <div ng-controller="filesController">
                 <div mobiscroll-form="formSettings">
                     <div class="mbsc-form-group">
-                        <div class="mbsc-form-group-title">Action menu</div>
-                        <ul mobiscroll-listview="menuSettings" mobiscroll-data="menuImages" class="mbsc-cloak">
-                            <li data-icon="image2">{{item.name}}</li>
-                        </ul>
+                        <div mobiscroll-listview="menuSettings" mobiscroll-data="files" class="mbsc-cloak">
+                            <div class="last_files">
+                                <div class="file_ico">
+                                    <img src="../assets/img/doc.svg" width="42px" />
+                                </div>
+                                <div class="file_detail">
+                                    <h4 class="file_info mb-0 mt-1"><span class="file_name">{{item.name}}.</span><span class="file_ext">{{item.extension}}</span></h4>
+                                    <p class="file_path mb-0">{{item.path}}</p>
+                                </div>
+                                <div class="download" ng-if="item.id == 1">
+                                    <div class="inner_down">
+                                        <md-progress-circular style="z-index: 999;" md-mode="determinate" value="55"></md-progress-circular>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <h4 class="md-subtitle mt-3 mb-3">Last Files: <span style="color:#c6ccd5;">Google Disk </span></h4>
-            <div class="row">
+            <!-- <div class="row">
                 <div class="col-12">
                     <div class="last_files">
                         <div class="file_ico">
@@ -142,7 +154,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </md-bottom-sheet>
