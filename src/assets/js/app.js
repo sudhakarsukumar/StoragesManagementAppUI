@@ -15,9 +15,6 @@ angular
     .module('app', [
         'ui.router',
         'angular-loading-bar',
-        'ngAnimate',
-        'chart.js',
-        'angular-svg-round-progressbar',
         'ngMaterial',
     ])
     .config(['cfpLoadingBarProvider', function(cfpLoadingBarProvider) {
