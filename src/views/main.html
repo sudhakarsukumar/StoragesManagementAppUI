@@ -2,11 +2,11 @@
     <div ng-controller="clouddrive" class="md-padding" ng-cloak>
         <h2 class="md-title">Hello,</h2>
         <h3 class="md-title-name">Mr. Anthony Burke</h3>
-        <div class="row drive_list" ng-controller="driveCtrl">
-            <div class="col-lg-3" ng-repeat="drive in drives">
+        <div class="row drive_list" ng-controller="driveCtrl" >
+            <div class="col-lg-3" ng-repeat="drive in drives" ng-click="showGridBottomSheet()">
                 <div class="card mb-0">
                     <div class="card-header">
-                        <div class="float-left mt-1 drive_logo" ng-click="showGridBottomSheet()"><img ng-src="{{drive.logo}}" width="42" height="42" /></div>
+                        <div class="float-left mt-1 drive_logo" ><img ng-src="{{drive.logo}}" width="42" height="42" /></div>
                     </div>
                     <div class="card-body pt-4 pb-3">
                         <div class="row">
