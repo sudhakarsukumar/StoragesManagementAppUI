@@ -19699,7 +19699,7 @@ md-bottom-sheet .drive_subname {
 }
 
 .folders_list {
-    padding: 15px;
+    padding: 8px 15px 15px 15px;
     margin: 8px 8px;
     /* display: flex; */
     box-shadow: #ddd 0px 1px 10px 2px;
@@ -19714,7 +19714,11 @@ md-bottom-sheet .drive_subname {
 
 .folder_coowners {
     width: 100%;
-    display: flex;
+    padding-right: 20px;
+    /* display: flex; */
+}
+.folder_coowners .col-2{
+    float:right;
 }
 
 .folder_details {
